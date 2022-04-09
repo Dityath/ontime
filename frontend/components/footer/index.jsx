@@ -9,7 +9,43 @@ function Footer({ page }) {
     <>
       {menu ? (
         <div className="bg-footerGrad/20 backdrop-filter backdrop-blur-xl w-[280px] h-[480px] fixed z-50 left-1/2 -ml-[140px] top-1/2 -mt-[228px] rounded-2xl p-5 text-white">
-          <h1>Add New</h1>
+          <h1>Add New Event</h1>
+          <form className="mt-5 flex flex-col gap-2">
+            <label className="font-light text-sm">Event Name</label>
+            <input
+              className="border-2 border-transparent bg-stone-800 opacity-75 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none placeholder-white w-full"
+              type="text"
+              name="name"
+              placeholder="Name"
+            />
+            <label className="font-light text-sm">Event Type</label>
+            <select
+              className="border-2 border-transparent bg-stone-800 opacity-75 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none placeholder-white w-full cursor-pointer"
+              name="search"
+            >
+              <option value="Submission">Submission</option>
+              <option value="Class">Class</option>
+              <option value="Meeting">Meeting</option>
+            </select>
+            <label className="font-light text-sm">Date</label>
+            <input
+              className="border-2 border-transparent bg-stone-800 opacity-75 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none placeholder-white w-full"
+              type="text"
+              name="date"
+              placeholder="Date"
+            />
+            <div className="flex items-center gap-2 mt-5">
+              <input
+                className="border-2 border-transparent bg-stone-800 opacity-75 px-5 rounded-lg text-sm focus:outline-none placeholder-white"
+                type="checkbox"
+                name="reminder"
+              />
+              <label className="font-light text-sm">Remind Me</label>
+            </div>
+            <button className="h-10 w-full mt-6 text-sm bg-gradient-to-r from-grad4 to-grad1 rounded-md text-white hover:opacity-80 transition duration-300 flex justify-center items-center">
+              Add Event
+            </button>
+          </form>
         </div>
       ) : (
         ""
