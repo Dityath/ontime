@@ -49,7 +49,7 @@ function Footer({ page }) {
             <label className="font-light text-sm">Date</label>
             <input
               className="border-2 border-transparent bg-stone-800 opacity-75 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none placeholder-white w-full"
-              type="text"
+              type="date"
               name="date"
               placeholder="Date"
             />
