@@ -64,8 +64,8 @@ model User {
 model Event {
   id          String    @id @default(cuid())
   userId      String
-  dateTime    DateTime
-  eventDesc   String?
+  dateTime    String
+  eventType   String
   eventName   String
   reminder    Boolean
   upcomingEvents  UpcomingEvent[]
