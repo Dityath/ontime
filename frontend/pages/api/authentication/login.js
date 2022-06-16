@@ -11,13 +11,13 @@ export default async function handler(req, res) {
     // Login will only use POST request method
     case "POST": {
       // Get email and password data form request body
-      const { email, password } = req.body;
+      const { username, password } = req.body;
       // Try to match email and password data from the request body with
       // email and password in DB
       try {
         // prisma.user.findFirst (https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#findfirst)
         const user = await prisma.user.findFirst({
-          where: { email: email },
+          where: { username: username },
         });
         // Check if the user exist or not
         if (user.password) {
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
           if (validatePass) {
             res.send({ success: true, code: 200, data: user });
           } else {
-            res.status(401).send({ message: "Incorrect email or password" });
+            res.status(401).send({ message: "Incorrect username or password" });
           }
         } else {
           // Send message if user doesn't exist
