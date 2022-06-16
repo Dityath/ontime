@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import CanvasLanding from "../components/canvasLanding";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -26,14 +27,21 @@ export default function Home() {
       <div className="mt-10 w-wmobile flex justify-center">
         <h3 className="text-white text-sm">Get Started</h3>
       </div>
-      <div className="flex justify-center mt-5">
-        <button className="h-8 w-36 bg-gradient-to-r from-grad4 to-grad1 rounded-md text-white hover:opacity-80 transition duration-300 flex justify-center items-center">
+      <div className="flex justify-evenly mt-5">
+        <button className="h-8 w-32 bg-gradient-to-r from-grad4 to-grad1 rounded-md text-white hover:opacity-80 transition duration-300 flex justify-center items-center">
           <Image
             src="/images/logo/google.png"
             width="68"
             height="22.9"
             alt="Google Button"
           />
+        </button>
+        <button className="h-8 w-32 bg-gradient-to-r from-grad4 to-grad1 rounded-md text-white hover:opacity-80 transition duration-300 flex justify-center items-center">
+          <h1>
+            <Link href={"/login"}>
+              <a className="text-lg">Login</a>
+            </Link>
+          </h1>
         </button>
       </div>
     </CanvasLanding>

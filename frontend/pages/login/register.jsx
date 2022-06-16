@@ -66,7 +66,7 @@ function Register() {
       <div className="text-center text-xs text-white font-light mx-5 mt-14">
         <h3>
           Already Have an Account?{" "}
-          <Link href={"/login"}>
+          <Link href={"/login"} >
             <a className="font-bold hover:opacity-80 transition">Here</a>
           </Link>
         </h3>

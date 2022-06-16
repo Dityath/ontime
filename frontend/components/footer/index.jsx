@@ -56,7 +56,7 @@ function Footer({ page }) {
                 <label className="font-light text-sm">Event Type</label>
                 <Field
                   className="border-2 border-transparent bg-stone-800 opacity-75 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none placeholder-white w-full cursor-pointer"
-                  name="event_type"
+                  name="event_type" as="select"
                 >
                   <option value="submission">Submission</option>
                   <option value="class">Class</option>
