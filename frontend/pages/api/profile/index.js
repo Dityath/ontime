@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     // Profile will only have GET method
     case "GET": {
       // Get userId data from request body
-      const userId = req.body.userId;
+      const userId = req.query.userId;
       // Try to find user data with the same id from userId using
       // prisma.findFirst() (https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#findfirst)
       try {

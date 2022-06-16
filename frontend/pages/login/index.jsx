@@ -1,11 +1,31 @@
 import { Field, Form, Formik } from "formik";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
+import api from "../../client/api";
 import CanvasLanding from "../../components/canvasLanding";
 
 function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
   const router = useRouter();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await api.post("/authentication/login", {
+        username: username,
+        password: password,
+      });
+      if (response) {
+        localStorage.setItem("userId", response.data.id);
+        router.push("/home");
+      }
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
 
   return (
     <CanvasLanding>
@@ -26,12 +46,17 @@ function Login() {
         }}
       >
         {({}) => (
-          <Form className="text-white mx-5 mt-14 flex flex-col gap-1">
+          <Form
+            onSubmit={handleSubmit}
+            className="text-white mx-5 mt-14 flex flex-col gap-1"
+          >
             <label className="font-light text-sm">Username</label>
             <Field
               className="border-2 border-transparent bg-stone-800 opacity-75 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none placeholder-white w-full"
               type="text"
-              name="name"
+              name="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               placeholder="Username"
             />
             <label className="font-light mt-5 text-sm">Password</label>
@@ -39,6 +64,8 @@ function Login() {
               className="border-2 border-transparent bg-stone-800 opacity-75 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none placeholder-white w-full"
               type="password"
               name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
             />
             <button
