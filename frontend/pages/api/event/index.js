@@ -25,7 +25,7 @@ export default async function (req, res) {
     }
     case "GET": {
       // Get userId data from request body
-      const userId = req.body.userId;
+      const userId = req.query.userId;
       // Find event(s) that match the userId using prisma.findMany() method
       // (https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#findmany)
       const events = await prisma.event.findMany({
