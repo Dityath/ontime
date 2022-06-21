@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import api from "../../client/api";
 import CanvasLanding from "../../components/canvasLanding";
+import Link from "next/link";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -80,12 +81,14 @@ function Login() {
       <div className="text-center text-xs text-white font-light mx-5 mt-28">
         <h3>Don&#32;t have account?</h3>
         <button className="h-8 w-full mt-4 text-xs bg-stone-800 opacity-75 rounded-md text-white hover:opacity-80 transition duration-300 flex justify-center items-center">
+          <Link href={"https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?client_id=123417142529-d49mm61estsh33e9rkff09doo7mmgs4l.apps.googleusercontent.com&scope=openid%20email%20profile&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback%2Fgoogle&state=QHjR7alnBH0myilAon30yWRcKrnCasY4aCMUpeiZr20&code_challenge=MEWtWSAxVmST9GEcVjnJ0YrH5Yrobffp80F4LafmxLU&code_challenge_method=S256&flowName=GeneralOAuthFlow"}>
           <Image
             src="/images/logo/google.png"
             width="45"
             height="15"
             alt="Google Button"
           />
+          </Link>
         </button>
         <button
           onClick={() => router.push("/login/register")}
