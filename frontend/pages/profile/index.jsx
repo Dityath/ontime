@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Canvas from "../../components/canvas";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
 import Image from "next/image";
+import api from "../../client/api";
 
 function Profile() {
+  const [profile, setProfile] = useState(null);
+
+  useEffect(() => {
+    if ("userId" in localStorage) {
+      console.log("masukk");
+      const userId = localStorage.getItem("userId");
+      api.get(`/profile?userId=${userId}`).then((res) => {
+        setProfile(res.data);
+      });
+    }
+    console.log("lewat");
+  }, []);
+
+  console.log(profile);
+
   return (
     <Canvas>
       <Header page="Profile" />
@@ -18,10 +34,10 @@ function Profile() {
           />
         </div>
         <div className="text-white">
-          <h1 className="text-xl font-semibold mt-8">Ditya Athallah</h1>
-          <p className="text-sm mt-2">1301194232</p>
-          <p className="text-sm">IF-43-INT</p>
-          <p className="text-sm">Mahasiswa</p>
+          <h1 className="text-xl font-semibold">{profile?.name}</h1>
+          <p className="text-sm mt-2">{profile?.username}</p>
+          <p className="text-sm">{profile?.email}</p>
+          <p className="text-sm">{profile?.occupation}</p>
         </div>
       </div>
       <Footer page="profile" />

@@ -16,6 +16,12 @@ function Header({ page }) {
   const router = useRouter();
   const [navbar, setNavbar] = useState(false);
 
+  const handleLogout = async (event) => {
+    event.preventDefault();
+    localStorage.clear();
+    router.push("/");
+  };
+
   return (
     <>
       <header className="backdrop-blur-sm z-40 flex w-wmobile bg-gradient-to-b from-black/40 to-black/0 justify-between items-center text-white p-5 fixed">
@@ -115,7 +121,10 @@ function Header({ page }) {
                   >
                     <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                   </svg>
-                  <span className="flex-1 ml-3 text-sm whitespace-nowrap">
+                  <span
+                    onClick={handleLogout}
+                    className="flex-1 ml-3 text-sm whitespace-nowrap"
+                  >
                     Logout
                   </span>
                 </a>

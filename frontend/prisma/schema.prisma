@@ -68,7 +68,7 @@ model Event {
   dateTime    String
   eventType   String
   eventName   String
-  reminder    Boolean
+  reminder    String
   upcomingEvents  UpcomingEvent[]
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
