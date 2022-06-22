@@ -18,7 +18,7 @@ function Profile() {
           />
         </div>
         <div className="text-white">
-          <h1 className="text-xl font-semibold">Ditya Athallah</h1>
+          <h1 className="text-xl font-semibold mt-8">Ditya Athallah</h1>
           <p className="text-sm mt-2">1301194232</p>
           <p className="text-sm">IF-43-INT</p>
           <p className="text-sm">Mahasiswa</p>
