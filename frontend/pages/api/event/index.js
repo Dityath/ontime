@@ -22,6 +22,7 @@ export default async function (req, res) {
       } catch (error) {
         console.log(error);
       }
+      break;
     }
     case "GET": {
       // Get userId data from request body
@@ -33,6 +34,38 @@ export default async function (req, res) {
       });
       // Send successful response
       res.send({ success: true, code: 200, data: events });
+      break;
+    }
+    case "DELETE": {
+      const id = req.query.id;
+
+      await prisma.event.delete({
+        where: {
+          id: id,
+        },
+      });
+
+      res.status(204).end();
+      break;
+    }
+    case "PUT": {
+      const id = req.query.id;
+      const data = req.body;
+
+      try {
+        const event = await prisma.event.update({
+          where: {
+            id: id,
+          },
+          data: {
+            ...data,
+          },
+        });
+        res.send({ success: true, code: 200, data: event });
+      } catch (error) {
+        console.log(error.response);
+      }
+      break;
     }
     default:
       // If the method is not "POST" or "GET", send exception "Method Not Allowed"
