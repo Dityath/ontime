@@ -1,6 +1,20 @@
+import { useRouter } from "next/router";
 import React from "react";
+import api from "../../client/api";
 
-function Task({ type, title, date, color, reminder, deadline }) {
+function Task({ id, type, title, date, color, reminder }) {
+  const router = useRouter();
+
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    try {
+      await api.delete(`/event?id=${id}`);
+      router.reload();
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
   return (
     <div
       className={`
@@ -16,18 +30,25 @@ function Task({ type, title, date, color, reminder, deadline }) {
         <h2 className="mb-1 text-xl font-bold">{title ? title : "no title"}</h2>
         <p className="text-xs">{date ? date : "err"}</p>
         <div className="flex gap-2 justify-self-end mt-3">
-        <button className="w-8 my-4 rounded-sm bg-transparent text-white text-sm shadow-lg hidden transition duration-200 hover:bg-gray-300 group-hover:block">Edit</button>
-        <button className="w-12 my-4 rounded-sm bg-transparent text-white text-sm shadow-lg hidden transition duration-200 hover:bg-gray-300 group-hover:block">Delete</button>
-      </div>
+          <button className="w-8 my-4 rounded-sm bg-transparent text-white text-sm shadow-lg hidden transition duration-200 hover:bg-gray-300 group-hover:block">
+            Edit
+          </button>
+          <button
+            onClick={handleDelete}
+            className="w-12 my-4 rounded-sm bg-transparent text-white text-sm shadow-lg hidden transition duration-200 hover:bg-gray-300 group-hover:block"
+          >
+            Delete
+          </button>
+        </div>
       </div>
       <div
         className={`flex flex-col items-end ${
-          reminder === "on" || reminder === "off"
+          reminder === "1" || reminder === "0"
             ? "justify-between"
             : "justify-end"
         }`}
       >
-        {reminder === "on" ? (
+        {reminder === "1" ? (
           <svg
             className="mr-2"
             width="17"
@@ -41,7 +62,7 @@ function Task({ type, title, date, color, reminder, deadline }) {
               fill="white"
             />
           </svg>
-        ) : reminder === "off" ? (
+        ) : reminder === "0" ? (
           <svg
             width="22"
             height="23"

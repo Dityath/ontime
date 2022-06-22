@@ -1,27 +1,58 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/header";
 import Canvas from "../components/canvas";
 import Task from "../components/task";
 import Footer from "../components/footer";
+import api from "../client/api";
 
 function Home() {
+  const [event, setEvent] = useState(null);
+
+  useEffect(() => {
+    if ("userId" in localStorage) {
+      const userId = localStorage.getItem("userId");
+      api.get(`/event?userId=${userId}`).then((res) => {
+        setEvent(res.data);
+      });
+    }
+  }, []);
+
   return (
     <Canvas>
       <Header page="Home" />
       <div className="mt-32 mx-5 text-white">
         <p className="text-xs">On Going Task</p>
-        <Task type="Class" title="Calculus" date="End in 11 AM, 22 January" />
+        {event &&
+          event.map((res) => {
+            if (res.reminder == "0") {
+              return (
+                <Task
+                  id={res.id}
+                  type={res.eventType}
+                  title={res.eventName}
+                  date={res.dateTime}
+                  color={""}
+                  reminder={res.reminder}
+                />
+              );
+            }
+          })}
         <p className="text-xs">Reminder</p>
-        <Task
-          type="Submission"
-          title="Calculus"
-          date="22 January"
-          color="violet"
-          reminder="on"
-          deadline={true}
-        />
-        <Task type="Class" title="Calculus" date="22 January" color="violet" />
-        <Task type="Class" title="Calculus" date="22 January" color="violet" />
+        {event &&
+          event.map((res) => {
+            if (res.reminder == "1") {
+              return (
+                <Task
+                  id={res.id}
+                  type={res.eventType}
+                  title={res.eventName}
+                  date={res.dateTime}
+                  color={"violet"}
+                  reminder={res.reminder}
+                />
+              );
+            }
+          })}
       </div>
       <Footer page="home" />
     </Canvas>

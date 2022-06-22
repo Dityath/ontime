@@ -3,9 +3,33 @@ import { useState } from "react";
 
 import Link from "next/link";
 import { Field, Form, Formik } from "formik";
+import { useRouter } from "next/router";
+import api from "../../client/api";
 
 function Footer({ page }) {
   const [menu, setMenu] = useState(false);
+  const [date, setDate] = useState("");
+  const [eventType, setEventType] = useState("");
+  const [name, setName] = useState("");
+  const [reminder, setReminder] = useState(false);
+
+  const router = useRouter();
+
+  const handleSubmit = async (data) => {
+    try {
+      await api.post("/event", {
+        userId: localStorage.getItem("userId"),
+        dateTime: data.date,
+        eventType: data.event_type,
+        eventName: data.name,
+        reminder: data.checked[0],
+      });
+      router.reload();
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
   return (
     <>
       {menu ? (
@@ -33,13 +57,14 @@ function Footer({ page }) {
           <Formik
             initialValues={{
               name: "",
-              event_type: "",
+              event_type: "Submission",
               date: "",
-              remind_me: false,
+              checked: "0",
             }}
             onSubmit={(data, { setSubmitting }) => {
               setTimeout(() => {
-                console.log(data);
+                console.log({ ...data, checked: data.checked[0] });
+                handleSubmit(data);
                 setSubmitting(false);
               }, 500);
             }}
@@ -56,7 +81,8 @@ function Footer({ page }) {
                 <label className="font-light text-sm">Event Type</label>
                 <Field
                   className="border-2 border-transparent bg-stone-800 opacity-75 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none placeholder-white w-full cursor-pointer"
-                  name="event_type" as="select"
+                  name="event_type"
+                  as="select"
                 >
                   <option value="submission">Submission</option>
                   <option value="class">Class</option>
@@ -73,8 +99,8 @@ function Footer({ page }) {
                   <Field
                     className="border-2 border-transparent bg-stone-800 opacity-75 px-5 rounded-lg text-sm focus:outline-none placeholder-white"
                     type="checkbox"
-                    name="remind_me"
-                    value={true}
+                    name="checked"
+                    value="1"
                   />
                   <label className="font-light text-sm">Remind Me</label>
                 </div>

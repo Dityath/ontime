@@ -18,6 +18,7 @@ export default NextAuth({
   //   },
   callbacks: {
     session: async ({ session, user }) => {
+      // localStorage.setItem("userId", user.id);
       const newSessions = {
         ...session,
         user: {
