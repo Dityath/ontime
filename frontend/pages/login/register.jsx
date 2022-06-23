@@ -10,6 +10,7 @@ function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
 
   const router = useRouter();
 
@@ -19,6 +20,7 @@ function Register() {
       await api.post("/authentication/register", {
         name: name,
         username: username,
+        phone: phone,
         email: email,
         password: password,
       });
@@ -33,7 +35,7 @@ function Register() {
 
   return (
     <CanvasLanding>
-      <div className="text-white text-2xl mt-10 pl-5">
+      <div className="text-white text-lg mt-10 pl-5">
         <h1 className="font-black">On Time</h1>
         <h2>Register</h2>
       </div>
@@ -41,6 +43,7 @@ function Register() {
         initialValues={{
           name: "",
           username: "",
+          phone: "",
           email: "",
           password: "",
         }}
@@ -65,7 +68,7 @@ function Register() {
               onChange={(e) => setName(e.target.value)}
               className="border-2 border-transparent bg-stone-800 opacity-75 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none placeholder-white w-full"
             />
-            <label className="font-light mt-5 text-sm">Username</label>
+            <label className="font-light mt-3 text-sm">Username</label>
             <Field
               type="text"
               name="username"
@@ -74,7 +77,16 @@ function Register() {
               onChange={(e) => setUsername(e.target.value)}
               className="border-2 border-transparent bg-stone-800 opacity-75 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none placeholder-white w-full"
             />
-            <label className="font-light mt-5 text-sm">Email</label>
+            <label className="font-light mt-3 text-sm">Phone Number</label>
+            <Field
+              type="text"
+              name="phone"
+              placeholder="Phone Number"
+              value={phone}
+              onChange = {(e) => setPhone(e.target.value)}
+              className="border-2 border-transparent bg-stone-800 opacity-75 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none placeholder-white w-full"
+            />
+            <label className="font-light mt-3 text-sm">Email</label>
             <Field
               type="email"
               name="email"
@@ -83,7 +95,7 @@ function Register() {
               onChange={(e) => setEmail(e.target.value)}
               className="border-2 border-transparent bg-stone-800 opacity-75 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none placeholder-white w-full"
             />
-            <label className="font-light mt-5 text-sm">Password</label>
+            <label className="font-light mt-3 text-sm">Password</label>
             <Field
               type="password"
               name="password"
@@ -94,14 +106,14 @@ function Register() {
             />
             <button
               type="submit"
-              className="h-10 w-full mt-6 text-sm bg-gradient-to-r from-grad4 to-grad1 rounded-md text-white hover:opacity-80 transition duration-300 flex justify-center items-center"
+              className="h-10 w-full mt-8 text-sm bg-gradient-to-r from-grad4 to-grad1 rounded-md text-white hover:opacity-80 transition duration-300 flex justify-center items-center"
             >
               Register
             </button>
           </Form>
         )}
       </Formik>
-      <div className="text-center text-xs text-white font-light mx-5 mt-14">
+      <div className="text-center text-xs text-white font-light mt-8">
         <h3>
           Already Have an Account?{" "}
           <Link href={"/login"} >

@@ -87,6 +87,7 @@ function Footer({ page }) {
                   <option value="submission">Submission</option>
                   <option value="class">Class</option>
                   <option value="meeting">Meeting</option>
+                  <option value="activity">Activity</option>
                 </Field>
                 <label className="font-light text-sm">Date</label>
                 <Field
