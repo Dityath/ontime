@@ -25,15 +25,21 @@ export default async function (req, res) {
       break;
     }
     case "GET": {
-      // Get userId data from request body
-      const userId = req.query.userId;
-      // Find event(s) that match the userId using prisma.findMany() method
-      // (https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#findmany)
-      const events = await prisma.event.findMany({
-        where: { userId: userId },
-      });
-      // Send successful response
-      res.send({ success: true, code: 200, data: events });
+      if (req.query.userId) {
+        const userId = req.query.userId;
+        const events = await prisma.event.findMany({
+          where: { userId: userId },
+        });
+        res.send({ success: true, code: 200, data: events });
+      } else if (req.query.id) {
+        const id = req.query.id;
+        const event = await prisma.event.findUnique({
+          where: {
+            id: id,
+          },
+        });
+        res.send({ success: true, code: 200, data: event });
+      }
       break;
     }
     case "DELETE": {
