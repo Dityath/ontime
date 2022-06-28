@@ -25,6 +25,7 @@ function Appointment() {
           event.map((res) => {
             return (
               <Task
+                key = {res.id}
                 type={res.eventType}
                 title={res.eventName}
                 date={res.dateTime}

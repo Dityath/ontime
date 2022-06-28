@@ -8,10 +8,6 @@ import api from "../../client/api";
 
 function Footer({ page }) {
   const [menu, setMenu] = useState(false);
-  const [date, setDate] = useState("");
-  const [eventType, setEventType] = useState("");
-  const [name, setName] = useState("");
-  const [reminder, setReminder] = useState(false);
 
   const router = useRouter();
 
@@ -87,6 +83,7 @@ function Footer({ page }) {
                   <option value="submission">Submission</option>
                   <option value="class">Class</option>
                   <option value="meeting">Meeting</option>
+                  <option value="activity">Activity</option>
                 </Field>
                 <label className="font-light text-sm">Date</label>
                 <Field

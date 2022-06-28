@@ -15,6 +15,11 @@ function Task({ id, type, title, date, color, reminder }) {
     }
   };
 
+  const handleEdit = async (event) => {
+    event.preventDefault();
+    router.push(`/${id}/editEvent`);
+  };
+
   return (
     <div
       className={`
@@ -30,7 +35,10 @@ function Task({ id, type, title, date, color, reminder }) {
         <h2 className="mb-1 text-xl font-bold">{title ? title : "no title"}</h2>
         <p className="text-xs">{date ? date : "err"}</p>
         <div className="flex gap-2 justify-self-end mt-3">
-          <button className="w-8 my-4 rounded-sm bg-transparent text-white text-sm shadow-lg hidden transition duration-200 hover:bg-gray-300 group-hover:block">
+          <button
+            onClick={handleEdit}
+            className="w-8 my-4 rounded-sm bg-transparent text-white text-sm shadow-lg hidden transition duration-200 hover:bg-gray-300 group-hover:block"
+          >
             Edit
           </button>
           <button
