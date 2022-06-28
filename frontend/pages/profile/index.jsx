@@ -24,7 +24,7 @@ function Profile() {
   return (
     <Canvas>
       <Header page="Profile" />
-      <div className="w-60 h-72 py-4 px-8 bg-black bg-opacity-40 backdrop-blur-lg shadow-lg rounded-tl-lg rounded-tr-3xl rounded-br-lg rounded-bl-3xl text-white my-32 mx-7">
+      <div className="w-46 h-72 py-4 px-8 bg-black bg-opacity-50 rounded-tl-lg rounded-tr-3xl rounded-br-lg rounded-bl-3xl text-white my-32 mx-7">
         <div className="flex justify-center md:justify-end -mt-16 rounded-full">
           <Image
             src="/images/Saly-22.png"
@@ -35,9 +35,10 @@ function Profile() {
         </div>
         <div className="text-white">
           <h1 className="text-xl font-semibold">{profile?.name}</h1>
-          <p className="text-sm mt-2">{profile?.username}</p>
-          <p className="text-sm">{profile?.email}</p>
-          <p className="text-sm">{profile?.occupation}</p>
+          <h2 className="text-sm mt-4">{profile?.username}</h2>
+          <p className="text-sm mt-2">{profile?.phone}</p>
+          <p className="text-sm mt-2">{profile?.email}</p>
+          <p className="text-sm mt-2">{profile?.occupation}</p>
         </div>
       </div>
       <Footer page="profile" />
