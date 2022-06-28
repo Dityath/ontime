@@ -21,6 +21,26 @@ export default async function handler(req, res) {
       } catch (error) {
         console.log(error);
       }
+      break;
+    }
+    case "PUT": {
+      const id = req.query.id;
+      const data = req.body;
+
+      try {
+        const profile = await prisma.user.update({
+          where: {
+            id: id,
+          },
+          data: {
+            ...data,
+          },
+        });
+        res.send({ success: true, code: 200, data: profile });
+      } catch (error) {
+        console.log(error.response);
+      }
+      break;
     }
     default:
       // If the method is not "GET", send exception "Method Not Allowed"
