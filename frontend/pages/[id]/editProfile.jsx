@@ -11,10 +11,7 @@ function edit() {
         <Formik
         initialValues={{
           name: "",
-          username: "",
           phone: "",
-          email: "",
-          password: "",
         }}
         onSubmit={(data, { setSubmitting }) => {
           setTimeout(() => {
