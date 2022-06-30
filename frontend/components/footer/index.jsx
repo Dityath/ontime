@@ -8,10 +8,6 @@ import api from "../../client/api";
 
 function Footer({ page }) {
   const [menu, setMenu] = useState(false);
-  const [date, setDate] = useState("");
-  const [eventType, setEventType] = useState("");
-  const [name, setName] = useState("");
-  const [reminder, setReminder] = useState(false);
 
   const router = useRouter();
 
