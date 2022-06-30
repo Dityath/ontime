@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import api from "../client/api";
 import Canvas from "../components/canvas";
@@ -7,10 +8,13 @@ import Task from "../components/task";
 
 function Appointment() {
   const [event, setEvent] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
-    if ("userId" in localStorage) {
-      const userId = localStorage.getItem("userId");
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      router.push("/");
+    } else {
       api.get(`/event?userId=${userId}`).then((res) => {
         setEvent(res.data);
       });
@@ -25,7 +29,7 @@ function Appointment() {
           event.map((res) => {
             return (
               <Task
-                key = {res.id}
+                key={res.id}
                 type={res.eventType}
                 title={res.eventName}
                 date={res.dateTime}
