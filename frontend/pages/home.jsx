@@ -4,13 +4,17 @@ import Canvas from "../components/canvas";
 import Task from "../components/task";
 import Footer from "../components/footer";
 import api from "../client/api";
+import { useRouter } from "next/router";
 
 function Home() {
   const [event, setEvent] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
-    if ("userId" in localStorage) {
-      const userId = localStorage.getItem("userId");
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      router.push("/");
+    } else {
       api.get(`/event?userId=${userId}`).then((res) => {
         setEvent(res.data);
       });
