@@ -20,6 +20,22 @@ function Task({ id, type, title, date, color, reminder }) {
     router.push(`/${id}/editEvent`);
   };
 
+  function notifyMe() {
+    let n = new Notification("Reminder is already set up");
+    console.log(n);
+
+    Notification.requestPermission()
+      .then(function (result) {
+        console.log(result); //granted || denied
+        if (Notification.permission == "granted") {
+          return "Access Granted";
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div
       className={`
@@ -57,7 +73,11 @@ function Task({ id, type, title, date, color, reminder }) {
         }`}
       >
         {reminder === "1" ? (
-          <svg
+          <button
+          onClick={()=>{
+            notifyMe();
+          }}>
+            <svg
             className="mr-2"
             width="17"
             height="22"
@@ -70,6 +90,7 @@ function Task({ id, type, title, date, color, reminder }) {
               fill="white"
             />
           </svg>
+          </button>
         ) : reminder === "0" ? (
           <svg
             width="22"
